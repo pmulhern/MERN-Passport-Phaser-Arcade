@@ -2,6 +2,7 @@ import React, {useState,useContext} from 'react';
 import AuthService from '../Services/AuthService';
 import Message from '../Components/Message';
 import {AuthContext} from '../Context/AuthContext';
+import { Redirect } from 'react-router';
 
 const Login = props=>{
     const [user,setUser] = useState({username: "", password : ""});
@@ -21,13 +22,13 @@ const Login = props=>{
                 authContext.setUser(user);
                 authContext.setIsAuthenticated(isAuthenticated);
                 // This will need to be changed from todos to the Arcade page
-                props.history.push('/todos');
+                // props.history.push('/todos');
+                Redirect('/')
             }
             else
                 setMessage(message);
         });
     }
-
 
 
     return(
@@ -49,6 +50,7 @@ const Login = props=>{
                 <button className="btn btn-lg btn-primary btn-block" 
                         type="submit">Log in </button>
             </form>
+            <h1>Game Portal</h1>
             {/* Displays successful submission or if something goes wrong */}
             {message ? <Message message={message}/> : null}
         </div>

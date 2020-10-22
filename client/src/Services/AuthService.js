@@ -25,11 +25,13 @@ export default {
         }).then(res => res.json())
           .then(data => data);
     },
+    // GET method implied
     logout : ()=>{
         return fetch('/user/logout')
                 .then(res => res.json())
                 .then(data => data);
     },
+    // GET method implied
     isAuthenticated : ()=>{
         return fetch('/user/authenticated')
                 .then(res=>{

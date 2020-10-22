@@ -45,9 +45,14 @@ const Navbar = props =>{
                         Home
                     </li>
                 </Link> 
-                <Link to="/todos">
+                {/* <Link to="/todos">
                     <li className="nav-item nav-link">
                         Todos
+                    </li>
+                </Link>  */}
+                <Link to="/game">
+                    <li className="nav-item nav-link">
+                        Play Game
                     </li>
                 </Link> 
                 {
@@ -67,7 +72,7 @@ const Navbar = props =>{
     return(
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <Link to="/">
-                <div className="navbar-brand">NoobCoder</div>
+                <div className="navbar-brand">GamePortal</div>
             </Link>
             <div className="collapse navbar-collapse" id="navbarText">
                 <ul className="navbar-nav mr-auto">
