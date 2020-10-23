@@ -1,9 +1,7 @@
 import React from 'react';
 import Navbar from './Components/Navbar';
-import Home from './Components/Home';
 import Login from './Components/Login';
 import Register from './Components/Register';
-import Todos from './Components/Todos';
 import Admin from './Components/Admin';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import PrivateRoute from './hocs/PrivateRoute'
@@ -20,8 +18,10 @@ function App() {
 
       <UnPrivateRoute path="/login" component={Login}/>
       <UnPrivateRoute path="/register" component={Register}/>
-      <PrivateRoute path="/admin" roles={["admin"]} component={Admin}/>
-      <Route exact path="/game" component={Game}/>  
+      <PrivateRoute path="/admin" roles={["admin"]} component={Admin}/> 
+      <Route exact path="/game" component={Game}/>
+       
+
       </Switch>
 
 

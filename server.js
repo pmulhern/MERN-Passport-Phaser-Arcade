@@ -10,25 +10,9 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/arcade", {
        useNewUrlParser: true,
        useUnifiedTopology: true,
        useCreateIndex: true
-    //    useFindAndModify: false
 })
 .then(() => console.log("MongoDB successfully connected!!"))
 .catch(err => console.log(err));
-
-// const User = require('./models/User.js')
-
-// const userInput = {
-//   username : "noobcoder1234",
-//   password : "1234567",
-//   role : "admin"
-// }
-
-// const user = new User (userInput);
-// user.save((err,document)=>{
-//   if(err)
-//     console.log(err);
-//   console.log(document)
-// });
 
 const userRouter = require('./routes/User');
 app.use('/user',userRouter)

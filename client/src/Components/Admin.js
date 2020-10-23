@@ -1,8 +1,10 @@
-  
-import React from 'react';
+  import React from 'react';
+  import $ from "jquery"
+
+
 
 const Admin = ()=>(
-    <h1>Admin Page</h1>
+    <h1 id="admin"> Admin Page</h1>
 )
 
 export default Admin;

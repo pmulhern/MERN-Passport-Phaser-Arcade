@@ -1,7 +1,7 @@
 export default {
     // By default this is a GET request
-    getTodos : ()=>{
-        return fetch('/user/todos')
+    getScores : ()=>{
+        return fetch('/user/scores')
                 .then(response=>{
                     // Passport automatically sends a 401 if the user is not Authorized
                     if(response.status !== 401){
@@ -13,11 +13,11 @@ export default {
                         return {message : {msgBody : "UnAuthorized",msgError : true}};
                 });
     },
-    // Since POST request, mothod, body and header must be used
-    postTodo : todo=>{
-        return fetch('/user/todo',{
+    // Since POST request, method, body and header must be used
+    postScore : score=>{
+        return fetch('/user/score',{
             method : "post",
-            body : JSON.stringify(todo),
+            body : JSON.stringify(score),
             headers:{
                 'Content-Type' : 'application/json'
             }
