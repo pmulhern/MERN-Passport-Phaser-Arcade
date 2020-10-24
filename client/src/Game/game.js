@@ -46,6 +46,7 @@ export const Game = () => {
         // zeroPad: zeroPad,
         update: update,
       },
+      scale: { parent: 'mygame', autoCenter: Phaser.Scale.CENTER_BOTH }
     };
 
     // Create the game with our config values
