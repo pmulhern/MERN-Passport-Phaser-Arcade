@@ -50,11 +50,7 @@ const Navbar = props =>{
                         Play Game
                     </li>
                 </Link> 
-                <Link to="/game2">
-                    <li className="nav-item nav-link">
-                        Play Game 2
-                    </li>
-                </Link> 
+                
                 {
                 user.role === "admin" ? 
                 <Link to="/admin">
