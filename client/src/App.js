@@ -8,7 +8,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import PrivateRoute from './hocs/PrivateRoute'
 import UnPrivateRoute from './hocs/UnPrivateRoute'
 import {Game} from "./pages/Game/game";
-// import {Game} from "./pages/Game/config";
+import {Game2} from "./pages/Game/game2";
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
       <PrivateRoute path="/admin" roles={["admin"]} component={Admin}/> 
       <PrivateRoute path="/home" roles={["user","admin"]}component={Home}/> 
       <Route exact path="/game" component={Game}/>
-      {/* <Route exact path="/game" component={Game}/> */}
+      <Route exact path="/game2" component={Game2}/>
        
 
       </Switch>

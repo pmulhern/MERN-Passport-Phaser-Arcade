@@ -1,7 +1,23 @@
 import Phaser, { Scene } from "phaser";
-// import { config } from "./game2";
+import Game from "./config";
 import Beam from "./beam";
-import Explosion from "./explosion";
+// import Explosion from "./explosion"; //Need to rename - Can't have 2 Explosion
+import background from "../../assets/images/background.png";
+import player from "../../assets/spritesheets/player.png";
+import ship from "../../assets/spritesheets/ship.png";
+import ship3 from "../../assets/spritesheets/ship3.png";
+import Explosion from "../../assets/spritesheets/explosion.png";
+import explosionaudio from "../../assets/sounds/explosion.ogg";
+import beamaudio from "../../assets/sounds/beam.ogg";
+import font from "../../assets/font/font.png";
+import fnt from "../../assets/font/font.fnt";
+import pickup from "../../assets/sounds/pickup.ogg";
+
+// ***PROBLEM FILES***
+// import powerup from "../../assets/images/power-up.png";  Lines 43, 76, 189
+// import ship2 from "../../assets/spritesheets/ship2.png";
+// import beam from "../../assets//spritesheets/beam.png";
+// import music from "../../assets/sounds/sci-fi.ogg";
 
 const config = {
   type: Phaser.AUTO,
@@ -13,11 +29,114 @@ class Scene2 extends Phaser.Scene {
   constructor() {
     super("playGame");
   }
+  preload() {
+  // PRELOAD - SCENE 1 STARTS HERE
+    this.load.image("background", background);
+    this.load.spritesheet("ship", ship,{
+      frameWidth: 71,
+      frameHeight: 85
+    });
+    // this.load.spritesheet("ship2", "/src/assets/spritesheets/ship2.png",{
+    //   frameWidth: 32,
+    //   frameHeight: 16
+    // });
+    this.load.spritesheet("ship3", ship3,{
+      frameWidth: 71,
+      frameHeight: 113
+    });
+    this.load.spritesheet("explosion", Explosion,{
+      frameWidth: 40,
+      frameHeight: 40
+    });
+    // this.load.spritesheet("power-up", powerup,{
+    //   frameWidth: 16,
+    //   frameHeight: 16
+    // });
+    this.load.spritesheet("player", player,{
+      frameWidth: 70,
+      frameHeight: 113
+    });
+    // this.load.spritesheet("beam", beam,{
+    //   frameWidth: 13 ,
+    //   frameHeight: 28
+    // });
+    this.load.bitmapFont('pixelFont', font, fnt);
+    
+    this.load.audio('audio_beam', beamaudio);
+    this.load.audio('audio_explosion', explosionaudio);
+    this.load.audio('audio_pickup', pickup);
+    // this.load.audio('music', music);
+// PRELOAD - SCENE 1 ENDS HERE
+
+  }
 
   create() {
+// CREATE - SCENE 1 STARTS HERE
+    this.add.text(20, 20, "Loading game...");
+    // this.scene.start("playGame") commented out in game.js
+    this.scene.start("playGame")
+
+    this.anims.create({
+      key: "ship1_anim",
+      frames: this.anims.generateFrameNumbers("ship"),
+      frameRate: 20,
+      repeat: -1
+    });
+    // this.anims.create({
+    //   key: "ship2_anim",
+    //   frames: this.anims.generateFrameNumbers("ship2"),
+    //   frameRate: 20,
+    //   repeat: -1
+    // });
+    this.anims.create({
+      key: "ship3_anim",
+      frames: this.anims.generateFrameNumbers("ship3"),
+      frameRate: 20,
+      repeat: -1
+    });
+    this.anims.create({
+      key: "explode",
+      frames: this.anims.generateFrameNumbers("explosion"),
+      frameRate: 20,
+      repeat: 0,
+      hideOnComplete: true
+    });
+    this.anims.create({
+      key: "red",
+      frames: this.anims.generateFrameNumbers("power-up", {
+        start: 0,
+        end: 1
+      }),
+      frameRate: 20,
+      repeat: -1
+    });
+    this.anims.create({
+      key: "gray",
+      frames: this.anims.generateFrameNumbers("power-up", {
+        start: 2,
+        end: 3
+      }),
+      frameRate: 20,
+      repeat: -1
+    });
+    this.anims.create({
+      key: "thrust",
+      frames: this.anims.generateFrameNumbers("player"),
+      frameRate: 20,
+      repeat: -1
+    });
+    this.anims.create({
+      key: "beam_anim",
+      frames: this.anims.generateFrameNumbers("beam"),
+      frameRate: 20,
+      repeat: -1
+    });
+// CREATE - SCENE 1 ENDS HERE
+
     /* uncomment code bellow to make background scrol */
     // this.background = this.add.tileSprite(0, 0, config.width, config.height, "background");
 
+// CREATE - SCENE 2 STARTS HERE
     this.background = this.add.image(0,0,"background");
     this.background.setOrigin(0,0);
 
@@ -30,8 +149,8 @@ class Scene2 extends Phaser.Scene {
     this.enemies.add(this.ship2);
     this.enemies.add(this.ship3);
     
-    this.player = this.physics.add.sprite(this.game.config.width / 2 - 8, this.game.config.height - 64, "player");
-    this.player.play("thrust");
+    this.player = this.physics.add.sprite(this.game.width / 2 - 8, this.game.height - 64, "player");
+    // this.player.play("thrust");
     /* assinn keys so player can move */
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.player.setCollideWorldBounds(true);
@@ -49,14 +168,14 @@ class Scene2 extends Phaser.Scene {
     this.projectiles = this.add.group();
     
     this.ship1.play("ship1_anim");
-    this.ship2.play("ship2_anim");
+    // this.ship2.play("ship2_anim");
     this.ship3.play("ship3_anim");
 
     this.ship1.setInteractive();
-    this.ship2.setInteractive();
+    // this.ship2.setInteractive();
     this.ship3.setInteractive();
 
-    this.input.on('gameobjectdown', this.destroyShip, this);
+    // this.input.on('gameobjectdown', this.destroyShip, this);
 
     // this.add.text(20, 20, "Playing game", {font: "25px Areial", fill: "yellow"});
 
@@ -72,11 +191,11 @@ class Scene2 extends Phaser.Scene {
        powerUp.setRandomPosition(0, 0, this.game.config.width, this.game.config.height);
 
       // set random animation
-      if (Math.random() > 0.5) {
-        powerUp.play("red");
-      } else {
-        powerUp.play("gray");
-      }
+      // if (Math.random() > 0.5) {
+      //   powerUp.play("red");
+      // } else {
+      //   powerUp.play("gray");
+      // }
 
       // setVelocity
       powerUp.setVelocity(100, 100);
@@ -106,7 +225,7 @@ class Scene2 extends Phaser.Scene {
     this.explosionSound = this.sound.add("audio_explosion");
     this.pickupSound = this.sound.add("audio_pickup");
 
-    this.music =this.sound.add("music");
+    // this.music =this.sound.add("music");
 
     var musicConfig = {
       mute: false,
@@ -117,8 +236,8 @@ class Scene2 extends Phaser.Scene {
       loop: false,
       delay: 0
     }
-    this.music.play(musicConfig);
-
+    // this.music.play(musicConfig);
+  // CREATE - SCENE 2 ENDS HERE
   }
   
   /* will be able to pickup the powerups*/
@@ -224,7 +343,7 @@ class Scene2 extends Phaser.Scene {
 }
 
   shootBeam() {
-    var beam = new Beam(this);
+    // var beam = new Beam(this);
     this.beamSound.play();
   }
 

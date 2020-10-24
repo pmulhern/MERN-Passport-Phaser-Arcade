@@ -3,7 +3,7 @@ import Scene2 from "./Scene2";
 import Phaser, { Scene } from "phaser";
 import React, {useEffect} from "react";
 
-export const Game = () => {
+export const Game2 = () => {
   useEffect(() => {
 
 const config = {
@@ -19,7 +19,7 @@ const config = {
           debugShowVelocity: false
       }
     },
-    scene: [Scene2],
+    scene: [Scene1, Scene2],
   };
 
   var game = new Phaser.Game(config);
@@ -30,5 +30,5 @@ const config = {
     game.destroy(true);
   };
 });
-return Game;
+return Game2;
 };
