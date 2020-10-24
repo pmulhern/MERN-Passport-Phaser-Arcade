@@ -1,3 +1,4 @@
+// Restricting the user from visiting the /login and /register routes as they are already logged into the system
 import React, {useContext} from 'react';
 import {Route,Redirect} from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';

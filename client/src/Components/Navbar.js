@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import AuthService from '../Services/AuthService';
 import { AuthContext } from '../Context/AuthContext';
 
@@ -45,27 +45,24 @@ const Navbar = props =>{
                         Home
                     </li>
                 </Link> 
-                {/* <Link to="/todos">
-                    <li className="nav-item nav-link">
-                        Todos
-                    </li>
-                </Link>  */}
                 <Link to="/game">
                     <li className="nav-item nav-link">
                         Play Game
                     </li>
                 </Link> 
                 {
-                    user.role === "admin" ? 
-                    <Link to="/admin">
-                        <li className="nav-item nav-link">
-                            Admin
-                        </li>
-                    </Link> : null
+                user.role === "admin" ? 
+                <Link to="/admin">
+                    <li className="nav-item nav-link">
+                        Admin
+                    </li>
+                </Link> : null
                 }  
+                <Link to="/">
                 <button type="button" 
                         className="btn btn-link nav-item nav-link" 
                         onClick={onClickLogoutHandler}>Logout</button>
+                </Link>
             </>
         )
     }

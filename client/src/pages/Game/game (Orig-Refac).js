@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import Phaser from "phaser";
-import background from "../../assets/images/background.jpg";
+import background from "../../assets/images/background.png";
 import player from "../../assets/spritesheets/player.png";
 import ship from "../../assets/spritesheets/ship.png";
 import ship3 from "../../assets/spritesheets/ship3.png";
@@ -10,13 +10,11 @@ import beamaudio from "../../assets/sounds/beam.ogg";
 import font from "../../assets/font/font.png";
 import fnt from "../../assets/font/font.fnt";
 import pickup from "../../assets/sounds/pickup.ogg";
-import Beam from "./beam";
-// import Explosion from "./explosion";
 
 // ***PROBLEM FILES***
 // import powerup from "../../assets/images/power-up.png";  Lines 43, 76, 189
 // import ship2 from "../../assets/spritesheets/ship2.png";
-import beam from "../../assets/images/ship.png";
+// import beam from "../../assets//spritesheets/beam.png";
 // import music from "../../assets/sounds/sci-fi.ogg";
 
 export const Game = () => {
@@ -26,8 +24,8 @@ export const Game = () => {
 
     const config = {
       type: Phaser.AUTO,
-    width: 1280,
-    height: 720,
+      width: 800,
+      height: 600,
       backgrounColor: 0x00000,
       pixelArt: true,
       physics: {
@@ -80,8 +78,6 @@ export const Game = () => {
         frameWidth: 70,
         frameHeight: 113,
       });
-
-      // ***THIS CODE CAUSE THE SCREEN TO GO BLACK
       // this.load.spritesheet("beam", beam,{
       //   frameWidth: 13 ,
       //   frameHeight: 28
@@ -94,7 +90,6 @@ export const Game = () => {
       // ***Music not defined - PJM comment out
       // this.load.audio('music', music);
     }
-
     function create() {
       this.add.text(20, 20, "Loading game...");
       // this.scene.start("playGame")
@@ -128,7 +123,6 @@ export const Game = () => {
       // this.enemies.add(this.ship2);
       this.enemies.add(this.ship3);
 
-// ANIMATION STARTS HERE
       this.anims.create({
         key: "ship1_anim",
         frames: this.anims.generateFrameNumbers("ship"),
@@ -184,8 +178,6 @@ export const Game = () => {
         frameRate: 20,
         repeat: -1,
       });
-// ANIMATION ENDS HERE
-
       this.ship1.play("ship1_anim");
       // this.ship2.play("ship2_anim");
       this.ship3.play("ship3_anim");
@@ -416,7 +408,6 @@ export const Game = () => {
         beam.update();
       }
 
-      // This causes React to error out
       this.shootBeam = function () {
         // var beam = new Beam(this);
         this.beamSound.play();
