@@ -40,7 +40,7 @@ const Navbar = props =>{
     const authenticatedNavBar = ()=>{
         return(
             <>
-                <Link to="/">
+                <Link to="/home">
                     <li className="nav-item nav-link">
                         Home
                     </li>

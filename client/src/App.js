@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './Components/Navbar';
 import Login from './Components/Login';
+import Home from './Components/Home';
 import Register from './Components/Register';
 import Admin from './Components/Admin';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
@@ -20,8 +21,9 @@ function App() {
       <UnPrivateRoute path="/login" component={Login}/>
       <UnPrivateRoute path="/register" component={Register}/>
       <PrivateRoute path="/admin" roles={["admin"]} component={Admin}/> 
-      {/* <Route exact path="/game" component={Game}/> */}
+      <PrivateRoute path="/home" roles={["user","admin"]}component={Home}/> 
       <Route exact path="/game" component={Game}/>
+      {/* <Route exact path="/game" component={Game}/> */}
        
 
       </Switch>
